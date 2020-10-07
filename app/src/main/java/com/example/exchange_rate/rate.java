@@ -31,12 +31,35 @@ class rate {
     public rate() {
     }
 
-    //1.常用汇率查询
+    //获取货币列表
     public String getRequest1(){
         String result =null;
         String r="";
         String url ="http://op.juhe.cn/onebox/exchange/list";//请求接口地址
         Map params = new HashMap();//请求参数
+        params.put("key",APPKEY);//应用APPKEY(应用详细页查询)
+
+        try {
+            result =net(url, params, "GET");
+            JSONObject object = new JSONObject(result);
+            if(object.getInt("error_code")==0){
+                r=object.toString();
+            }else{
+                r="错误";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return r;
+    }
+    //3.实时汇率查询换算
+    public static String getRequest3(String from,String to){
+        String result =null;
+        String r="";
+        String url ="http://op.juhe.cn/onebox/exchange/currency";//请求接口地址
+        Map params = new HashMap();//请求参数
+        params.put("from",from);//转换汇率前的货币代码
+        params.put("to",to);//转换汇率成的货币代码
         params.put("key",APPKEY);//应用APPKEY(应用详细页查询)
 
         try {

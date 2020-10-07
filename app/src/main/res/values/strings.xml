@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Exchange_rate</string>
+    <string-array name="action">
+        <item>无</item>
+    </string-array>
 </resources>
